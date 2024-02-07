@@ -1,0 +1,289 @@
+            _______________________________________
+---**------| LÝ THUYẾT VỀ DATA STRUCTURE ALGORITHM |------**----
+           |_______________________________________|
+
+
+CHƯƠNG 2. THUẬT TOÁN TÌM KIẾM
+
+1/ Định nghĩa về tìm kiếm
+-------------------------
+
+    Trong môn khoa học máy tính, tìm kiếm là một quá trình tìm kiếm một đối tượng với những thuộc tính đặc trưng trong tập hợp các đối tượng. 
+    Đối tượng tìm kiếm ấy có thể là bản ghi trong một cơ sở dữ liệu, những dữ liệu cơ bản trong một mảng, đoạn văn trong files, node
+    trên cây,...
+
+2/ Tại sao chúng ta cần tìm kiếm?
+---------------------------------
+
+    Tìm kiếm là một trong những phần quan trọng nhất của thuật toán. 
+    Chúng ta đều biết rằng máy tính lưu trữ rất nhiều thông tin. 
+    Và để tìm kiếm thông tin ấy một cách nhanh chóng, chúng ta cần phải nhờ thuật toán tìm kiếm. 
+    Có rất nhiều cách để sắp xếp thông tin giúp cho việc tìm kiếm trở nên nhanh chóng. 
+    Trong chương này, chúng ta sẽ tìm hiểu một số thuật toán tìm kiếm cơ bản.
+
+3/ CÁC THUẬT TOÁN TÌM KIẾM CƠ BẢN
+---------------------------------
+
+                 __________________________________________________
+------------#1: | Thuật toán TÌM KIẾM TUYẾN TÍNH (Linear Search): |---------
+                |_________________________________________________|
+• BÀI TOÁN:
+-----------
+
+    Cho trước mảng một chiều có n phần tử. Tìm phần tử data có giá trị cho trước trong mảng. 
+    Nếu phần tử đó tồn tại trong danh sách thì xuất vị trí của nó trong danh sách. 
+    Nếu phần tử đó không tồn tại trong danh sách thì trả về giá trị -1.
+
+• Ý TƯỞNG:
+---------
+
+    - duyệt tuần tự từ phần tử thứ 0 đến phần tử thứ (n - 1) nếu tìm thấy -> trả về vị trí của phần tử đó. Nếu duyệt tới phần tử cuối cùng là (n - 1) không thấy -> trả về giá trị -1.
+
+• CÁC BƯỚC THUẬT TOÁN
+---------------------
+
+    #B1: gán i = 0
+
+    # B2: điều kiện lặp i < n (vì i chỉ chạy từ 0 -> n - 1) => tới n thì sẽ dừng vòng lặp.
+
+    # B3: so sánh từng từng phần tử a[i] vói data. 
+    Có 2 khả năng xảy ra:
+        1/ Nếu phần tử a[i] == data => return về vị trí i ngay lập tức.
+        2/ Nếu phần tử a[i] != datat => Tiếp tục sang B4:
+
+    # B4:
+        i = i + 1 : tăng i lên 1 để so sánh phần tử a[i] tiếp theo với data.
+        Xảy ra 2 trường hợp:
+        1/ nếu a[i] == n => return -1.
+        2/ nếu a[i] != n => quay trở lại B2.
+
+• ĐỘ PHỨC TẠP:
+--------------
+
+    - O(n):
+    - Tốt nhất: O(1).
+    - Space complexity: O(n) => duyệt hết n phần tử.
+
+                           ______________________________________________
+-----------------------#2:| Thuật toán TÌM KIẾM NHỊ PHÂN(Binary Search): |-----------------------------------
+                          |______________________________________________|
+
+• BÀI TOÁN:
+-----------
+
+    Cho trước mảng một chiều có n phần tử. Tìm phần tử data có giá trị cho trước trong mảng. 
+    Nếu phần tử đó tồn tại trong danh sách thì xuất vị trí của nó trong danh sách. 
+    Nếu phần tử đó không tồn tại trong danh sách thì trả về giá trị -1.
+
+• Ý TƯỞNG:
+----------
+
+    - So sánh data với phần tử ở vị trí ở giữa mảng
+    - Xảy ra 3 trường hợp:
+    1/ Nếu data bằng phần tử ở vị trí giữa -> trả về vị trí ở giữa.
+
+    2/ Nếu data < phần tử ở vị trí giữa -> duyệt phần từ vị trí đầu tiên tới phần tử ở vị trí giữa giảm đi 1 đơn vị => lúc này chỉ cần duyệt trong nữa đoạn phía trước.
+
+    3/ Nếu data > phần tử ở vị trí giữa -> duyệt phần tử từ vị trí ở giữa tăng thêm 1 đơn vị tới phần tử ở cuối mảng => lúc này chỉ cần duyệt trong nữa đoạn phía sau.
+
+==> Ở mỗi phép lặp chúng ta sẽ bỏ đi được nữa đoạn phần tử data không xuất hiện
+
+• CÁC BƯỚC THUẬT TOÁN
+---------------------
+
+    # B0: Cần sắp xếp mảng trước khi tìm kiếm
+
+    # B1: Gán start = 0, end = n - 1
+
+    # B2: điều kiện lặp đến khi (start <= end) 
+    Vì sau mỗi bước lặp start hoặc end sẽ tăng giảm cùng 1 đoạn
+
+    #B3: So sánh start và end
+    Có 2 trường hợp:
+    ----------------
+
+        1/ start > end:
+        --------------
+
+        - không tìm thấy data trong vị trí
+        sẽ trả về giá trị -1.
+
+        2/ start <= end:
+        ----------------
+             
+        - Thông thường sử dụng công thức thứ nhất để gán vị trí mid vì sẽ tránh trường hợp tràn số (overflow)
+             ______________________________________________________________
+            | mid = start + (end - start) / 2 HOẶC mid = (start + end) / 2 |
+            |______________________________________________________________|
+        - Thực hiện B4.
+    
+    # B4: Chỉ thực hiện khi trường 2 xảy ra ở B3:
+    --------------------------------------------
+
+    Có 3 trường hợp xảy ra:
+    -----------------------
+            __________________
+        1/ | arr[mid] == data |
+           |__________________|
+        => return vị trí Mid
+
+            __________________
+        2/ | arr[mid] < data: |
+           |__________________|
+        => cập nhật lại start = mid + 1, sau đó lặp lại B3 và xét tiếp 3 trường hợp tới khi | start > end |
+        - duyệt trong đoạn [start, end] = [mid + 1, end]
+
+            __________________
+        3/ | arr[mid] > data: |
+           |__________________|
+        => cập nhật lại biến end = mid - 1, sau đó lặp lại B3 tới khi nào start > end và xét tiếp 3 trường hợp tới khi nào start > end
+        - duyệt trong đoạn [start, end] = [start, mid - 1]
+    
+• ĐỘ PHỨC TẠP:
+--------------
+
+    - O(logN) = log2N: nghĩa là mỗi bước lặp sẽ giảm đi 1 nữa so với ban đầu
+    - Tốt nhất: O(1)
+    - Trung Bình: O(Log N)
+    - Tệ nhất: O(log N)
+    - Space complexity:
+        + O(1) : code trực Tiếp
+        + O(logN) : code đệ quy
+
+• LƯU Ý:
+--------
+
+    1/ Danh sách phải được sắp xếp trước khi sắp xếp để tối ưu thời gian tìm kiếm
+
+    2/ Tìm kiếm Nhị phân yêu cầu cấu trúc dữ liệu phải được lưu trữ ở vị trí bộ nhớ liền kề như array tĩnh (static array)
+
+    3/ Các phần tử trong array phải so sánh được -> có thể sắp xếp
+    - O(logN): nghĩa là qua mỗi lần lặp phạm vị sẽ giảm đi 1 nữa so với phạm vi trước đó
+
+    * Trường hợp mảng đã ĐƯỢC SẮP XẾP:
+    ----------------------------------
+
+    - ưu tiên BINARY SERACH vì thời gian chạy tối ưu hơn O(logN) thay vì LINEAR SEARCH thời gian chạy là o(N)
+
+    * Trường hợp mảng CHƯA SẮP XẾP:
+    -------------------------------
+
+    - Ưu tiên LINEAR SEARCH với duyệt tuyến tính -> thời gian chạy là O(N)
+    - còn với BINARY SEARCH cần phải sử dụng thuật toán sắp xếp như:
+        + Merge Sort: O(N logN)
+        + Quick Sort: O(N logN)
+        + Heap Sort: O(N logN)
+        + Hàm sort trong STL vì trong  STL đã implement cho ta
+        hàm sort bằng merge sort hoặc quick sort cũng với độ phức tạo là O(N logN)
+
+    ==> vì vậy thời gian chạy của BINARY SORT trong trường hợp chưa được sắp xếp là O(N logN) vì BINARY SORT LÀ O(logN) còn các thuật toán sắp xếp là O(N logN) và vối quy tắc tính toán độ phức tạp thì lấy độ phức tạp lớn hơn ==> độ phức tạp của BINARY SEARCH trong trường hợp này là |O(N logN)|
+
+    - Vì sao không nên dùng BINARY SEARCH trong trường hợp mảng chưa được sắp xếp?
+    ------------------------------------------------------------------------------
+
+    => LÝ DO:
+    ---------
+
+        + thời gian chạy lâu hơn do phải thực hiện sắp xếp trước nên độ phức tạp ở đây là O(N logN) thay vì O(N) khi dùng LINEAR SEARCH
+
+        + nếu không sort -> có thể dẫn đến kết quả search không chính xác và nếu đầu vào với phần tử lớn thì kết quả tìm kiếm có thể sai lệch rất lớn thay vì linear search là duyệt n phần tử -> vị trí cần tìm
+
+                        ________________________________________________________
+-----------------------| #3 Thuật toán TÌM KIẾM NỘI SUY (Interpolation Search): |-----------------------------
+                       |________________________________________________________|
+
+• ĐỊNH nghĩa
+------------
+
+    - Là một thuật toán cải tiến từ thuật toán tìm kiếm nhị phân. Thay vì xác định điểm chính giữa của danh sách, thuật toán tìm kiếm nội suy xác định điểm gần với vị trí của phần tử cần tìm, do đó tối ưu được thời gian hơn so với thuật toán tìm kiếm nhị phân. trong đó các giá trị trong một mảng đã được sắp xếp được phân phối đồng đều. Để giải thuật tìm kiếm này làm việc chính xác thì tập dữ liệu phải được sắp xếp.
+
+• BÀI TOÁN:
+-----------
+
+    Cho trước mảng một chiều có n phần tử. Tìm phần tử data có giá trị cho trước trong mảng. 
+    Nếu phần tử đó tồn tại trong danh sách thì xuất vị trí của nó trong danh sách. 
+    Nếu phần tử đó không tồn tại trong danh sách thì trả về giá trị -1.
+
+• Ý TƯỞNG:
+---------
+
+    - Xác định điểm GẦN vị trí của phần tử data cần tìm và bắt đầu tìm từ đó.
+
+    - gán cho vị trí start bằng vị trí đầu tiên trong mảng | start = 0 | và vị trí end là vị trí ở cuối mảng | end = n - 1 |
+                                                                             _______________________________________________________
+    - Điều kiện để thực hiện lại vòng lặp để thu hẹp đoạn tìm kiếm là khi   |start <= end và data >= arr[start] và data <= arr[end] |
+      ---------                  --------    -------                        |_______________________________________________________|
+
+    - VỊ TRÍ BẮT ĐẦU TÌM KIẾM đặt là pos (position) được tính bởi CÔNG THỨC:
+    -------------------------                                     ---------
+        __________________________________________________________________________________
+        | pos = start + {[(end - start) / (arr[end] - arr[start])] * (data - arr[start])} |
+        |_________________________________________________________________________________|
+
+                                     __________________
+    - Nếu tại phần tử ở vị trí pos  | arr[pos] == data | ==> return về vị trí pos
+                                    |__________________|
+
+                                     __________________                           _________________
+    - Nếu tại phần tử ở vị trí pos  | arr[pos] < data  | ==> khỏi tạo lại vị trí | start = pos + 1 |
+                                    |__________________|                         |_________________|
+
+                                     __________________                           _______________
+    - Nếu tại phần tử ở vị trí pos  | arr[pos] > data  | ==> khởi tại lại vị trí | end = pos - 1 |
+                                    |__________________|                         |_______________|
+
+
+• CÁC BƯỚC THUẬT TOÁN
+---------------------
+
+    # B0: Cần sắp xếp mảng trước khi tìm kiếm
+
+    # B1: Gán start = 0, end = n - 1
+
+    # B2: Điều kiện lặp lại : | start <= end && data >= arr[start] && data <= arr[end] |
+
+    # B3: tính mid theo công thức : pos = start + {[(end - start) / (arr[end] - arr[start])] * (data - arr[start])}
+
+    VD: mảng arr : | 1 | 2 | 4 | 6 | 7 | 10 | 11 | 14 | 15 |
+    Vị trí index     0   1   2   3   4    5    6    7    8
+                   start                                end
+
+    - data = 4 => arr[2] = data
+    - start = 0, end = 8 => arr[start] = 1 , arr[end] = 15
+    - pos = 0 + {[(8 - 0) / (15 - 1)] * (4 - 1)} = 1 vì lấy int => pos = 1 và arr[pos] = 2
+    
+    # B4: So sánh:
+    -------------
+
+        - Có 3 trường hợp
+        -----------------
+            _________________
+        +   |arr[pos] == data |
+            |_________________|
+        --> return về vị trí pos
+
+             _________________
+        +   | arr[pos] < data |
+            |_________________|
+        - cập nhật lại:  start = pos + 1
+        - và đoạn xét là [start, end] = [pos + 1, end]
+
+             _________________
+        +   | arr[pos] > data |
+            |_________________|
+        - Cập nhật lại end = pos - 1
+        - và đoạn xét tiếp theo là [start, end] = [start, pos - 1]
+
+
+
+• ĐỘ PHỨC TẠP:
+--------------
+
+    - tối ưu được thời gian hơn so với thuật toán tìm kiếm nhị phân. Độ phức tạp thời gian cũng vì thế mà tốt hơn là O(log(log(N))).
+    - Trường hợp xấu nhất là O(N)
+
+ LƯU Ý:
+ ------
+    - Tuy nhiên, thuật toán tìm kiếm nhị phân luôn ổn định với độ phức tạp thời gian là O(log(N)), thuật toán tìm kiếm nội suy lại không như vậy. Trong những trường hợp xấu nhất như dãy tăng/giảm phân bố không đều, thuật toán tìm kiếm này đạt độ phức tạp là O(N), không khác gì dùng thuật toán tìm kiếm tuyến tính cả. Do đó, bạn nên sử dụng thuật toán tìm kiếm nhị phân để đảm bảo được độ phức tạp O(log(N)).
+
+    - Các giá trị trong một mảng đã được sắp xếp được phân phối đồng đều. Để giải thuật tìm kiếm này làm việc chính xác thì tập dữ liệu phải được sắp xếp.

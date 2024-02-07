@@ -1,0 +1,182 @@
+            _______________________________________
+---**------| LÝ THUYẾT VỀ DATA STRUCTURE ALGORITHM |------**----
+           |_______________________________________|
+
+CHƯƠNG 1: GIỚI THIỆU VỀ GIẢI THUẬT
+----------------------------------
+
+1/ Định nghĩa:
+-------------
+
+    - 1 quy trình rõ ràng
+    - được xác định và hiểu -> giải quyết vấn đề tính toán
+    ==> Để được coi là giải thuật sẽ bao gồm |3 TÍNH CHẤT|:
+        + Kết quả phải chính xác
+        + Kết thúc trong một số bước hữu hạn
+        + Áp dụng cho một lớp vấn đề tiêu chuẩn
+    TÓM LẠI: 
+    -------
+    - Giải thuật là :
+        + phương pháp 
+        + quy trình 
+        -> giải quyết vấn đề tính toán bằng một mô tả của hữu hạn các bước đơn giản và sẽ thực hiện được bất kì yêu đầu vào của vấn
+
+2/ Sự cần thiết của việc học giải thuật:
+---------------------------------------
+
+    • Giải thuật là cơ sở của khoa học máy tính
+    • Tối ưu hóa hiệu suất
+    • Giải quyết vấn đề phức tạp
+    • Cải thiện khả năng logic và tư duy
+    • Sự cần thiết trong các lĩnh vực khác nhau
+    • Hiểu sâu về các cấu trúc dữ liệu
+    • Phát triển kỹ năng gỡ lỗi và phân tích
+
+3/ Độ phúc tạp của thuật toán (Big O notation):
+----------------------------------------------
+
+    Một số khái niệm căn bản:
+    -------------------------
+
+    • T(N) là một hàm số để mô tả thời gian thực thi của một thuật toán, dựa trên kích thước
+    đầu vào của nó.
+    • Big O là ký hiệu đại số để biểu diễn độ phức tạp thời gian của một thuật toán, biểu thị
+    tốc độ tăng của hàm thời gian T(N) khi kích thước đầu vào N tiến đến vô hạn.
+    • Ký hiệu của Big O là "O", theo sau là một biểu thức đại số biểu thị hàm tốn thời gian
+    của thuật toán, ví dụ như O(N) hoặc O(N log N).
+
+• CÁC RULE:
+----------
+
+    #1: Bỏ qua hằng số
+        - O(1) * n (n: là 1 số rất lớn) -> vẫn là O(1)
+        - Vd: 3 * O(1) = O(1) chứ không phải là O(3)
+        
+    #2 : Bỏ qua O bé hơn
+        - bỏ ra thời gian có tốc độ chạy nhanh hơn => lấy Big O nào to nhất 
+
+    #3: Xét trường hợp xấu nhất
+
+• BIG O BẢNG NHỚ:
+------------------
+
+    - Cột y: độ phức tạp || thời gian chạy
+    - Cột x: dữ liệu đầu vào
+    - Tốc độ chạy xét từ nhanh nhất tới chậm nhất
+    1/ O(1) || O(logN) : nghĩa là qua mỗi lần lặp sẽ giảm phạm vị đi một nữa
+    2/ O(N)
+    3/ O(NlogN)
+    4/ O(N^2)
+    5/ O(N^3)
+    6/ O(2^N)
+    7/ O(N!)
+
+• KINH NGHIỆM THỰC TẾ:
+----------------------
+
+    - Thời gian hằng cũng quan trọng
+    - Cân nhắc cả case tốt nhất và case trung bình
+    - Các hàm function từ thư viên cũng có độ phức tạp
+
+* CÁC LOẠI THỜI GIAN ĐỘ PHỨC TẠP
+--------------------------------
+
+    1. Thời gian hằng: O(1)
+    -----------------------
+
+    - Như phép gán: 
+    - Không phụ thuộc đầu vào
+    
+
+    2. Thời gian tuyến tính: O(N)
+    ----------------------------
+
+    - vòng lặp
+    VD: 
+    for (var i = 0; i < n; i++)
+    {
+        sum += i; // O(1)
+    }
+    => N * O(1) = O(N)
+
+    Áp dụng quy luật thứ nhất bỏ qua hằng số
+    -----------------------------------------
+    VD: 
+        # Đoạn code 1
+    for (var i = 0; i < n; i++)
+    {
+        sum += i; // O(1)
+    }
+
+    for (var i = 0; i < n; i++)
+    {
+        sum += i; // O(1)
+    }
+
+    => ĐỘ PHỰC TẠP 2 * O(N)
+
+        # Đoạn code 2
+    for (var i = 0; i < 2n; i++)
+    {
+        sum += i; // O(1)
+    }
+    => ĐỘ PHỰC TẠP O(2N)
+    
+==> TỔNG KẾT: CẢ 2 ĐỘ PHỨC TẠP CỦA 2 ĐOẠN CODE LÀ O(N) vì: N -> dương vô cùng 
+    --------
+
+    3. Thời gian bậc 2: O(N^2)    
+    --------------------------
+
+    - 2 vòng for lồng nhau
+
+    VD:
+    for (var i = 0; i < n; i++)
+        for (var j = 0; j < n; j++)
+            sum += i + j;
+    => ĐỘ PHỨC TẠP: N * N * O(1) = O(N^2)
+
+- MỘT SỐ ĐỘ PHỨC TẠP CỦA GIẢI THUẬT PHỔ BIẾN
+---------------------------------------------
+
+    1/ Tìm kiếm tuyến tính (Linear Search):
+    --------------------------------------
+
+        - Trung bình và Tốt nhất là O(n)
+        - Xuất nhất là O(n)
+        * CẢI TIẾN:
+        -----------
+
+            - Phương pháp SKIP -> tăng tốc độ tìm kiếm
+            - tốt nhất O(1)
+            - xấu nhất O(n)
+            - trung bình O(n/m) : m là số phần tử được 'SKIP' qua
+
+    2/ Tìm kiếm nhị phân (Binary Search):
+    ------------------------------------
+
+        - Trung bình và Tốt nhất là O(long n)
+        - Xuất nhất là O(log n)
+
+    3/ Tìm kiếm nội suy (Interpolation Search):
+    ------------------------------------------
+
+        - Trung bình là O(log(log n))
+        - Trường hợp phân bố đều -> O(n)
+
+_________________________________________________________
+|    4/ Sắp xếp nổi bọt (Bubble Sort) : O(n^2)          |
+|    5/ Sắp xếp chọn (Selection Sort) : O(n^2)          |
+|    6/ Sắp xếp chèn (Insertion Sort) : O(n^2)          |
+|    7/ Sắp xếp trực tiếp (Interchange Sort) : O(n^2)   |
+|                                                       |
+|    8/ Sắp xếp nhanh (Quick Sort) : O(n logn)          |
+|    9/ Sắp xếp trộn (Merge Sort) : O(n logn)           |
+|    10/ Sắp xếp vun đống (Heap Sort) : O(n logn)       |
+|_______________________________________________________|
+
+________________________________
+|    N^2     : quadratic        |
+|    N Log N : linearithmic     |
+|    n       : linear           |
+|_______________________________|
